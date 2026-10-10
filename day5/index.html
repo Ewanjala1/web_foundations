@@ -2,113 +2,26 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Day 5 Assignment: Asynchronous User Directory fetching data with fetch, async/await, error handling, and real-time filtering.">
-  <title>User Directory &mdash; Day 5 Assignment</title>
-  
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>User Directory</title>
   <link rel="stylesheet" href="style.css">
   <script src="users.js" defer></script>
 </head>
 <body>
-
-  <header class="app-header">
-    <div class="header-container">
-      <div class="header-badge">Day 5 Assignment</div>
-      <h1 class="header-title">Team &amp; User Directory</h1>
-      <p class="header-subtitle">
-        Exploring asynchronous JavaScript: fetching remote JSON data, managing state, handling errors gracefully, and real-time client-side filtering.
-      </p>
-    </div>
+  <header>
+    <h1>User Directory</h1>
   </header>
 
-  <main class="app-main">
-    <section class="controls-section" aria-label="Directory Controls">
-      <div class="controls-card">
-        <div class="search-wrapper">
-          <label for="filter" class="search-label">Filter Users</label>
-          <div class="input-container">
-            <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <circle cx="11" cy="11" r="8"></circle>
-              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-            </svg>
-            <input 
-              type="text" 
-              id="filter" 
-              class="filter-box" 
-              placeholder="Filter users by name, username, email, city..." 
-              autocomplete="off"
-              aria-describedby="filter-count"
-            >
-            <button id="clear-filter" class="clear-btn" type="button" title="Clear filter" aria-label="Clear filter" hidden>&times;</button>
-          </div>
-        </div>
+  <main>
+    <section>
+      <label for="filter-input">Filter users</label>
+      <input type="search" id="filter-input" placeholder="Type a name, username or email" autocomplete="off">
 
-        <div class="controls-actions">
-          <div class="status-meta">
-            <span id="filter-count" class="badge-count">Loading users...</span>
-          </div>
+      <p id="loading" hidden>Loading users...</p>
+      <p id="error-message" role="alert"></p>
 
-          <div class="action-buttons">
-            <button id="reload-btn" type="button" class="btn btn-secondary">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <polyline points="23 4 23 10 17 10"></polyline>
-                <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
-              </svg>
-              <span>Reload API</span>
-            </button>
-            <button id="test-error-btn" type="button" class="btn btn-outline-danger">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <circle cx="12" cy="12" r="10"></circle>
-                <line x1="12" y1="8" x2="12" y2="12"></line>
-                <line x1="12" y1="16" x2="12.01" y2="16"></line>
-              </svg>
-              <span>Test Error Path</span>
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Error Banner -->
-    <div id="error-banner" class="alert alert-danger" role="alert" hidden>
-      <div class="alert-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <circle cx="12" cy="12" r="10"></circle>
-          <line x1="15" y1="9" x2="9" y2="15"></line>
-          <line x1="9" y1="9" x2="15" y2="15"></line>
-        </svg>
-      </div>
-      <div class="alert-content">
-        <h4 class="alert-heading">Failed to fetch users</h4>
-        <p id="error-message" class="alert-text">An unexpected error occurred while fetching the user data.</p>
-      </div>
-      <button id="retry-btn" type="button" class="btn btn-sm btn-danger">Retry</button>
-    </div>
-
-    <!-- Loading Indicator -->
-    <div id="loading-spinner" class="loading-state" role="status" aria-live="polite">
-      <div class="spinner"></div>
-      <p class="loading-text">Fetching user records from API...</p>
-    </div>
-
-    <!-- Users Grid / List Container -->
-    <section class="results-section" aria-label="User Directory List">
-      <div id="user-list" class="user-grid" role="region" aria-live="polite">
-        <!-- User cards dynamically populated by renderUsers() -->
-      </div>
+      <ul id="users-list"></ul>
     </section>
   </main>
-
-  <footer class="app-footer">
-    <div class="footer-container">
-      <p>&copy; 2026 Web Foundations &mdash; Day 5 Assignment. Built with HTML5, CSS3, &amp; Vanilla JavaScript.</p>
-    </div>
-  </footer>
-
 </body>
 </html>
